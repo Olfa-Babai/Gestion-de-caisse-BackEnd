@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("genaccount")
+@Document(collection="genaccount")
 public class GenAccount {
 
 	@Id

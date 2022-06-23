@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("admprofile")
+@Document(collection="admprofile")
 public class AdmProfile {
 	
 	@Id
