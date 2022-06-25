@@ -3,6 +3,7 @@ package tn.arabsoft.spring.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
 import tn.arabsoft.spring.models.AdmUser;
@@ -13,15 +14,18 @@ public class AdmUserService implements IAdmUserService {
 
 	@Autowired
 	IAdmUserRepository userRepository;
+	
+	@Autowired
+	MongoOperations mongoOperations;
 
 	@Override
 	public AdmUser addUser(AdmUser user) {
 		return userRepository.insert(user);
 	}
 
-	AdmUser update(){
-		//MongoOperations
-		return null;
+	@Override
+	public AdmUser updateUser(AdmUser user){
+		return mongoOperations.save(user);
 	}
 	
 	@Override
@@ -44,6 +48,11 @@ public class AdmUserService implements IAdmUserService {
 			}
 		}
 		return finalu;
+	}
+
+	@Override
+	public AdmUser getUserById(int id) {
+		return userRepository.findById(id).orElse(null);
 	}
 
 }

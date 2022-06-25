@@ -43,7 +43,7 @@ public class AdmUserController {
 	@PutMapping("/update")
 	@ResponseBody
 	public AdmUser updateUser(@RequestBody AdmUser user) {
-		return this.admUserService.addUser(user);
+		return this.admUserService.updateUser(user);
 	}
 	
 	@DeleteMapping("/delete/{id}")
@@ -62,6 +62,12 @@ public class AdmUserController {
 	@ResponseBody
 	public AdmUser searchUser(@RequestParam String matricule) {
 		return this.admUserService.searchUser(matricule);
+	}
+	
+	@GetMapping("/get/{id}")
+	@ResponseBody
+	public AdmUser getUser(@PathVariable int id) {
+		return this.admUserService.getUserById(id);
 	}
 	
 }

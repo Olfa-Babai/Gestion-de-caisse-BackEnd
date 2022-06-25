@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -20,6 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Document("admuserprofile")
 public class AdmUserProfile {
+	
+	@Transient
+    public static final String SEQUENCE_NAME = "userprofiles_sequence";
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
