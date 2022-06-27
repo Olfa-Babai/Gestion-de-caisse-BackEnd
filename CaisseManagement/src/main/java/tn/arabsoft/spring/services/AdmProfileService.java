@@ -30,6 +30,7 @@ public class AdmProfileService implements IAdmProfileService {
 	
 	@Override
 	public AdmProfile addProfile(AdmProfile profile, AdmUser user) {
+		/*
 		List<AdmUserProfile> ups=new ArrayList<AdmUserProfile>();
 		ups=this.admUserProfileRepository.findAll();
 		boolean test=false;
@@ -67,7 +68,9 @@ public class AdmProfileService implements IAdmProfileService {
 			mongoOperations.save(user);
 			profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
 			admProfileRepository.insert(profile);
-		}
+		} */
+		profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
+		admProfileRepository.insert(profile);
 		return profile;
 	}
 
