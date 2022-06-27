@@ -1,12 +1,11 @@
 package tn.arabsoft.spring.models;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
@@ -33,9 +32,9 @@ public class AdmUserProfile {
 	private Date usp_enddt;
 	private int usp_credit;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="user_profile")
-	private List<AdmUser> user_aff;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private AdmUser user_aff;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="user_profile")
-	private List<AdmProfile> profile_aff;	
+	@ManyToOne
+	private AdmProfile profile_aff;	
 }

@@ -1,13 +1,15 @@
 package tn.arabsoft.spring.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
@@ -40,7 +42,7 @@ public class AdmProfile {
 	@Nullable
 	private String pru_natusp;
 	
-	@ManyToOne
-	private AdmUserProfile user_profile;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="profile_aff")
+	private List<AdmUserProfile> user_profiles;
 	
 }

@@ -1,6 +1,5 @@
 package tn.arabsoft.spring.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import tn.arabsoft.spring.models.AdmProfile;
 import tn.arabsoft.spring.models.AdmUser;
-import tn.arabsoft.spring.models.AdmUserProfile;
 import tn.arabsoft.spring.repositories.IAdmProfileRepository;
 import tn.arabsoft.spring.repositories.IAdmUserProfileRepository;
 

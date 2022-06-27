@@ -1,7 +1,9 @@
 package tn.arabsoft.spring.models;
 
 import java.time.LocalDateTime;
-import javax.persistence.ManyToOne;
+import java.util.List;
+
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
@@ -43,11 +45,10 @@ public class AdmUser {
 	private String use_status;
 	
 	@Nullable
-	@ManyToOne
-	private AdmUserProfile user_profile;
+	@OneToMany
+	private List<AdmUserProfile> user_profiles;
 	
 	@Nullable
 	@OneToOne(mappedBy="admuser")
 	private GenAgent genagent;
-	
 }
