@@ -2,7 +2,6 @@ package tn.arabsoft.spring.models;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
@@ -32,7 +31,7 @@ public class AdmUserProfile {
 	private Date usp_enddt;
 	private int usp_credit;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private AdmUser user_aff;
 	
 	@ManyToOne

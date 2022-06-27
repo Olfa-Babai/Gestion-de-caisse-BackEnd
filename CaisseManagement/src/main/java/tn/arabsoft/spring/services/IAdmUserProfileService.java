@@ -7,7 +7,7 @@ import tn.arabsoft.spring.models.AdmUserProfile;
 public interface IAdmUserProfileService {
 
 	// ajouter une nouvelle affectation entre un user et un profil
-	public AdmUserProfile addAffUP(AdmProfile p, AdmUser u);
+	public AdmUserProfile addAffUP(int p, int u);
 	// affecter un profil à un user
 	public AdmUserProfile addAffUToP(AdmProfile p, AdmUser u);
 	// affecter un user à un profil
