@@ -42,13 +42,11 @@ public class AdmProfileService implements IAdmProfileService {
 		}
 		if(test){
 			// hetha ken l'user mawjoud deja f une affectation
-			up.getUser_aff().add(user);
 			up.getProfile_aff().add(profile);
-			user.setUser_profile(up);
 			profile.setUser_profile(up);
 			// update up + update user + ajout profile
 			mongoOperations.save(up);
-			mongoOperations.save(user);
+			profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
 			admProfileRepository.insert(profile);
 		}
 		else{
@@ -60,42 +58,37 @@ public class AdmProfileService implements IAdmProfileService {
 		// profile
 			List<AdmProfile> profileaff=new ArrayList<AdmProfile>();
 			profileaff.add(profile);
-			up.setProfile_aff(profileaff);
+			up.setProfile_aff(profileaff); 	
 			user.setUser_profile(up);
 			profile.setUser_profile(up);
-			// ajout up + update user + ajout profile
+		// ajout up + update user + ajout profile
 			up.setUsp_id( sequenceGenerator.generateSequence(AdmUserProfile.SEQUENCE_NAME));
 			admUserProfileRepository.insert(up);
 			mongoOperations.save(user);
+			profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
 			admProfileRepository.insert(profile);
 		}
-		
 		return profile;
-		
 	}
 
 	@Override
 	public void deleteProfile(int id) {
-		// TODO Auto-generated method stub
-		
+		admProfileRepository.deleteById(id);
 	}
 
 	@Override
 	public List<AdmProfile> listProfiles() {
-		// TODO Auto-generated method stub
-		return null;
+		return admProfileRepository.findAll();
 	}
 
 	@Override
-	public AdmProfile updateProfile(AdmProfile user) {
-		// TODO Auto-generated method stub
-		return null;
+	public AdmProfile updateProfile(AdmProfile profile) {
+		return mongoOperations.save(profile);
 	}
 
 	@Override
 	public AdmProfile getProfileById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return admProfileRepository.findById(id).orElse(null);
 	}
 
 }

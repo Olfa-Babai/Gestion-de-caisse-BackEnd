@@ -10,7 +10,7 @@ public interface IAdmProfileService {
 	AdmProfile addProfile(AdmProfile profile, AdmUser user);
 	void deleteProfile(int id);
 	List<AdmProfile> listProfiles(); // all profiles in the db
-	AdmProfile updateProfile(AdmProfile user);
+	AdmProfile updateProfile(AdmProfile profile);
 	AdmProfile getProfileById(int id);
 	
 }
