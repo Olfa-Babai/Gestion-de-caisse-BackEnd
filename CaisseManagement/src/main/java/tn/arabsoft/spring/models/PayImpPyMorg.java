@@ -2,7 +2,6 @@ package tn.arabsoft.spring.models;
 
 
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,7 +25,5 @@ public class PayImpPyMorg {
 	private String pym_code;
 	private String pym_name;
 	
-	@ManyToOne
-	private PayCashDesk paycashdesk;
 	
 }

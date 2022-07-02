@@ -1,10 +1,7 @@
 package tn.arabsoft.spring.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
@@ -44,11 +41,4 @@ public class AdmUser {
 	@Nullable
 	private String use_status;
 	
-	@Nullable
-	@OneToMany
-	private List<AdmUserProfile> user_profiles;
-	
-	@Nullable
-	@OneToOne(mappedBy="admuser")
-	private GenAgent genagent;
 }

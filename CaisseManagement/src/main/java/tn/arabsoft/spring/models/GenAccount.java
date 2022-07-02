@@ -3,8 +3,6 @@ package tn.arabsoft.spring.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,11 +22,5 @@ public class GenAccount {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int aco_id;
 	private int aco_amount;
-	
-	@OneToOne
-	private GenDebt gendebt;
-	
-	@ManyToOne
-	private Party party;
 	
 }

@@ -2,7 +2,6 @@ package tn.arabsoft.spring.models;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,7 +21,5 @@ public class GenOrg {
 	private int org_id;
 	private String org_name;
 	
-	@OneToMany(mappedBy="genorg")
-	private GenDebt genDebt;
 	
 }

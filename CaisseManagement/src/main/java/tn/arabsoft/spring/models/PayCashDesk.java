@@ -5,8 +5,8 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -28,10 +28,8 @@ public class PayCashDesk {
 	private String cah_maxtrans;
 	private int cah_internal;
 	
-	@OneToMany(mappedBy="paycashdesk")
+	@DBRef
 	private List<PayImpPyMorg> payimppymorg;
 	
-	@OneToMany(mappedBy="paycashdesk")
-	private List<PayCashDeskSession> paycashdesksession;
 	
 }

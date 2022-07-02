@@ -1,14 +1,12 @@
 package tn.arabsoft.spring.models;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -30,10 +28,7 @@ public class PayCashDeskMove {
 	private int cam_amount;
 	private int vom_camtp;
 	
-	@OneToMany(mappedBy="paycashdeskmove")
-	private List<PayCashDebt> paycashdebts;
-	
-	@OneToOne(mappedBy="paycashdeskmove")
+	@DBRef
 	private PayCashDeskSession paycashdesksession;
 	
 }

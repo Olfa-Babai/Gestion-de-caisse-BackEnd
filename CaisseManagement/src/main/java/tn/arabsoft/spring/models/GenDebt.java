@@ -3,13 +3,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 // Facture :
@@ -43,18 +42,18 @@ public class GenDebt {
 	
 	// Associations :
 	
-	@ManyToOne
+	@DBRef
 	private AgrServiceAgr agrserviceagr;
 	
-	@ManyToOne
+	@DBRef
 	private GenOrg genorg;
 	
-	@ManyToOne 
+	@DBRef 
 	private Party party;
 	
-	@OneToOne(mappedBy="gendebt")
+	@DBRef
 	private GenAccount genaccount;
 	
-	@OneToOne(mappedBy="gendebt")
+	@DBRef
 	private PayCashDebt paycashdebt;
 }

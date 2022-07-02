@@ -1,14 +1,10 @@
 package tn.arabsoft.spring.models;
 
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.CascadeType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +21,5 @@ public class AgrServiceAgr {
 	private int sag_id;
 	private String sag_refe;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="agrserviceagr")
-	private List<GenDebt> gendebts;	
 	
 }

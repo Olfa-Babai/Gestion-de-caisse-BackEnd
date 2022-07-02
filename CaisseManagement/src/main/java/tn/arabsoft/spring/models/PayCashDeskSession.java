@@ -5,9 +5,8 @@ import java.util.Date;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -26,13 +25,10 @@ public class PayCashDeskSession {
 	private int css_id;
 	private Date css_enddt;
 	
-	@ManyToOne
+	@DBRef
 	private PayCashDesk paycashdesk;
 	
-	@ManyToOne
-	private GenAgent genagent;
-	
-	@OneToOne
-	private PayCashDeskMove paycashdeskmove;
+	@DBRef
+	private AdmUserProfile userprofileaffectation;
 	
 }

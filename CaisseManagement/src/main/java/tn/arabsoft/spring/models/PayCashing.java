@@ -4,9 +4,9 @@ import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -31,10 +31,9 @@ public class PayCashing {
 	private String csh_bank;
 	private int vow_rejmotif;
 	
-	@ManyToOne
+	@DBRef
 	private GenBank genbank;
 	
-	@ManyToOne
-	private GenAgent genagent;
+	
 	
 }

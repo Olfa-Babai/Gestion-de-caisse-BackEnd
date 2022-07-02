@@ -4,10 +4,9 @@ import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -27,10 +26,7 @@ public class PayCashDebt {
 	private Date pcd_date;
 	private int pcd_amount;
 	
-	@OneToOne
-	private GenDebt gendebt;
-	
-	@ManyToOne
+	@DBRef
 	private PayCashDeskMove paycashdeskmove;
 	
 }
