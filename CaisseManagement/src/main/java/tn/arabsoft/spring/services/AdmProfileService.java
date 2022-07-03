@@ -28,45 +28,6 @@ public class AdmProfileService implements IAdmProfileService {
 	
 	@Override
 	public AdmProfile addProfile(AdmProfile profile, AdmUser user) {
-		/*
-		List<AdmUserProfile> ups=new ArrayList<AdmUserProfile>();
-		ups=this.admUserProfileRepository.findAll();
-		boolean test=false;
-		AdmUserProfile up=new AdmUserProfile();
-		for(AdmUserProfile upp : ups){
-			for(AdmUser u : upp.getUser_aff()){
-					test=(u.equals(user))?true:false;
-					if(test==true) up=upp;
-			}
-		}
-		if(test){
-			// hetha ken l'user mawjoud deja f une affectation
-			up.getProfile_aff().add(profile);
-			profile.setUser_profile(up);
-			// update up + update user + ajout profile
-			mongoOperations.save(up);
-			profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
-			admProfileRepository.insert(profile);
-		}
-		else{
-		// hetha ken l'user mch mawjoud f hata aff => saret toul baad l'ajout mtaa l'user
-		// user
-			List<AdmUser> usersaff=new ArrayList<AdmUser>();
-			usersaff.add(user);
-			up.setUser_aff(usersaff);
-		// profile
-			List<AdmProfile> profileaff=new ArrayList<AdmProfile>();
-			profileaff.add(profile);
-			up.setProfile_aff(profileaff); 	
-			user.setUser_profile(up);
-			profile.setUser_profile(up);
-		// ajout up + update user + ajout profile
-			up.setUsp_id( sequenceGenerator.generateSequence(AdmUserProfile.SEQUENCE_NAME));
-			admUserProfileRepository.insert(up);
-			mongoOperations.save(user);
-			profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
-			admProfileRepository.insert(profile);
-		} */
 		profile.setPru_id(sequenceGenerator.generateSequence(AdmProfile.SEQUENCE_NAME));
 		admProfileRepository.insert(profile);
 		return profile;

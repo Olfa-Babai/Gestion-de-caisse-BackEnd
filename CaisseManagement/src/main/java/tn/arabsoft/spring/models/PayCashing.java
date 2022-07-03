@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -31,9 +30,6 @@ public class PayCashing {
 	private String csh_bank;
 	private int vow_rejmotif;
 	
-	@DBRef
 	private GenBank genbank;
-	
-	
-	
+		
 }

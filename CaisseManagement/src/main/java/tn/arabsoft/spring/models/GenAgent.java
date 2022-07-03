@@ -32,7 +32,6 @@ public class GenAgent {
 	private String age_login;
 	private String age_pwd;
 	
-	@DBRef
 	private AdmUser admuser;
 	
 	@DBRef

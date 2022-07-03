@@ -32,11 +32,6 @@ public class AdmUserProfileService implements IAdmUserProfileService {
 		AdmUserProfile up= new AdmUserProfile();
 		AdmUser u= admu.findById(iu).orElse(null);
 		AdmProfile p=admp.findById(ip).orElse(null);
-		/*
-		if(u.getUser_profiles()==null) u.setUser_profiles(new ArrayList<AdmUserProfile>());
-		if(p.getUser_profiles()==null) p.setUser_profiles(new ArrayList<AdmUserProfile>());
-		u.getUser_profiles().add(up);
-		p.getUser_profiles().add(up); */
 		up.setProfile_aff(p);
 		up.setUser_aff(u);
 		up.setUsp_id(sequenceGenerator.generateSequence(AdmUserProfile.SEQUENCE_NAME));

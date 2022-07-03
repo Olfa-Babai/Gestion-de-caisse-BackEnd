@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import tn.arabsoft.spring.models.AdmUser;
 import tn.arabsoft.spring.models.GenAgent;
 import tn.arabsoft.spring.repositories.IAdmUserRepository;
+import tn.arabsoft.spring.repositories.IGenAgentRepository;
 
 @Service
 public class AdmUserService implements IAdmUserService {
 
 	@Autowired
 	IAdmUserRepository userRepository;
+	
+	@Autowired
+	IGenAgentRepository agentRepo;
 	
 	@Autowired
 	MongoOperations mongoOperations;
@@ -31,9 +35,11 @@ public class AdmUserService implements IAdmUserService {
 		agent.setAge_login(user.getUse_login());
 		agent.setAge_pwd(user.getUse_psw());
 		agent.setAge_id( sequenceGenerator.generateSequence(GenAgent.SEQUENCE_NAME));
-		//user.setGenagent(agent);
-		// ajout du user + agent
-		return userRepository.insert(user);
+		// ajout user + agent
+		agent.setAdmuser(user);		
+		userRepository.insert(user);
+		agentRepo.insert(agent);
+		return user;
 	}
 
 	@Override

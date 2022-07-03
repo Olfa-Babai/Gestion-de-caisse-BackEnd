@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -31,9 +30,9 @@ public class AdmUserProfile {
 	private Date usp_enddt;
 	private int usp_credit;
 	
-	@DBRef
+	
 	private AdmUser user_aff;
 	
-	@DBRef
+	
 	private AdmProfile profile_aff;	
 }

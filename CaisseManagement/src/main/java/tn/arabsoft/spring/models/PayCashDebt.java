@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +25,6 @@ public class PayCashDebt {
 	private Date pcd_date;
 	private int pcd_amount;
 	
-	@DBRef
 	private PayCashDeskMove paycashdeskmove;
 	
 }

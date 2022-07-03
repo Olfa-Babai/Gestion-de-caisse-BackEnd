@@ -9,4 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/agent")
 public class GenAgentController {
 
+	
 }
