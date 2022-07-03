@@ -41,4 +41,10 @@ public class AdmUser {
 	@Nullable
 	private String use_status;
 	
+	@Override
+	public String toString() {
+		return "  Matricule :" + use_matricule +" | Nom et prenom : "+  use_lname+" " + use_fname + " ";
+	}
+	
+	
 }

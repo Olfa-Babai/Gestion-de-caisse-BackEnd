@@ -38,5 +38,11 @@ public class AdmProfile {
 	private LocalDateTime pru_updtprudt;
 	@Nullable
 	private String pru_natusp;
+	@Override
+	public String toString() {
+		return " id : " + pru_id + ", role : " + pru_role + " \n";
+	}
+	
+	
 	
 }
