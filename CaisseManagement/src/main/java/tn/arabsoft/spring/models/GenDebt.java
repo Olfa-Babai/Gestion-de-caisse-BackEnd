@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 // Facture :
@@ -17,6 +18,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @AllArgsConstructor
 @Document("gendebt")
 public class GenDebt {
+	
+	@Transient
+    public static final String SEQUENCE_NAME = "debts_sequence";
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

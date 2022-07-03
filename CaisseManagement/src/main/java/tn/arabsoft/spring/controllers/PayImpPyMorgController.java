@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.arabsoft.spring.models.PayImpPyMorg;
 import tn.arabsoft.spring.services.IPayImpPyMorgService;
+import tn.arabsoft.spring.services.SequenceGeneratorService;
 
 @CrossOrigin
 @RestController
@@ -19,9 +20,13 @@ public class PayImpPyMorgController {
 	@Autowired
 	IPayImpPyMorgService payImpService;
 	
+	@Autowired
+	SequenceGeneratorService sequenceGenerator;
+	
 	@PostMapping("/add")
 	@ResponseBody
 	public PayImpPyMorg add(@RequestBody PayImpPyMorg p){
+		p.setPyim_id(sequenceGenerator.generateSequence(PayImpPyMorg.SEQUENCE_NAME));
 		return payImpService.add(p);
 	}
 

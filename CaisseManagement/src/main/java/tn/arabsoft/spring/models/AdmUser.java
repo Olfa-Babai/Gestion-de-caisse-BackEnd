@@ -46,5 +46,4 @@ public class AdmUser {
 		return "  Matricule :" + use_matricule +" | Nom et prenom : "+  use_lname+" " + use_fname + " ";
 	}
 	
-	
 }

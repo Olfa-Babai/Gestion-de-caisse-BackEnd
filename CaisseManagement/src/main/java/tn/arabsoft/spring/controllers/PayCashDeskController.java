@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tn.arabsoft.spring.models.PayCashDesk;
 import tn.arabsoft.spring.services.IPayCashDeskService;
+import tn.arabsoft.spring.services.SequenceGeneratorService;
 
 @CrossOrigin
 @RestController
@@ -26,9 +27,13 @@ public class PayCashDeskController {
 	@Autowired
 	IPayCashDeskService payService;
 	
+	@Autowired
+	SequenceGeneratorService sequenceGenerator;
+	
 	@PostMapping("/add")
 	@ResponseBody
-	public PayCashDesk addCaisse(@RequestBody PayCashDesk c, @RequestParam List<Integer> ids){
+	public PayCashDesk addCaisse(@RequestBody PayCashDesk c, @RequestParam int[] ids){
+		c.setCah_id(sequenceGenerator.generateSequence(PayCashDesk.SEQUENCE_NAME));
 		return payService.addCaisse(c, ids);
 	}
 	
