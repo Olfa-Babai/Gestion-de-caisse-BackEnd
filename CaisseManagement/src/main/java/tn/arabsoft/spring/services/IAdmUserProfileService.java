@@ -22,4 +22,8 @@ public interface IAdmUserProfileService {
 	public int nbsAdmin();
 	Map<AdmUser, List<AdmProfile>> organizing();
 	void savetoPdf() throws FileNotFoundException, DocumentException;
+	// afficher les caissiers ou CH ou admin
+	Map<AdmUser, List<AdmProfile>> extract(String type);
+	// recherche user or profile
+	Map<AdmUser, List<AdmProfile>> searching(String word);
 }

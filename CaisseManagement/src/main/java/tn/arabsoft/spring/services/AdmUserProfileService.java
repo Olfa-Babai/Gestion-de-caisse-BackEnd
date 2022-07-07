@@ -117,6 +117,21 @@ public class AdmUserProfileService implements IAdmUserProfileService {
 		
 		return map;
 	}
+	
+	@Override
+	public Map<AdmUser, List<AdmProfile>> extract(String type){
+		Map<AdmUser, List<AdmProfile>> map = new HashMap<AdmUser, List<AdmProfile>>();
+		Map<AdmUser, List<AdmProfile>> m=this.organizing();
+		for (Map.Entry mapentry : m.entrySet()) {
+			List<AdmProfile> profiles=(List<AdmProfile>) mapentry.getValue();
+			for(AdmProfile p : profiles){
+				if (p.getPru_role().toString().equals(type)){
+					map.put((AdmUser)mapentry.getKey(),(List<AdmProfile>)mapentry.getValue());
+				}
+			}
+		}
+		return map;
+	}
 
 	@Override
 	public void savetoPdf() throws FileNotFoundException, DocumentException {
@@ -167,6 +182,29 @@ public class AdmUserProfileService implements IAdmUserProfileService {
 
 		document.add(donnee);
 		document.close();
+	}
+
+	public boolean containsword(List<AdmProfile> ps, String word){
+		boolean test=false;
+		for(AdmProfile p:ps){
+			if(p.getPru_label().contains(word)||p.getPru_status().contains(word))
+				test=true;
+		}
+		return test;
+	}
+	
+	@Override
+	public Map<AdmUser, List<AdmProfile>> searching(String word) {
+		Map<AdmUser, List<AdmProfile>> map = new HashMap<AdmUser, List<AdmProfile>>();
+		Map<AdmUser, List<AdmProfile>> m=this.organizing();
+		for (Map.Entry mapentry : m.entrySet()) {
+			AdmUser u=(AdmUser)mapentry.getKey();
+			List<AdmProfile> ps=(List<AdmProfile>)mapentry.getValue();
+			if(u.getUse_fname().contains(word)||u.getUse_lname().contains(word)||containsword(ps,word)){
+				map.put(u, ps);
+			}
+		}
+		return map;
 	}
 
 }

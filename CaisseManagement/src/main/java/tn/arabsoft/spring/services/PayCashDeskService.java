@@ -3,7 +3,6 @@ package tn.arabsoft.spring.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,9 @@ public class PayCashDeskService implements IPayCashDeskService {
 	IPayCashDeskRepository caisseRepo;
 	
 	@Override
-	public PayCashDesk addCaisse(PayCashDesk c, int[] id) {
+	public PayCashDesk addCaisse (PayCashDesk c, List<Integer> id) {
 		List<PayImpPyMorg> lp= new ArrayList<PayImpPyMorg>();
+		
 		for(int i : id){
 			lp.add(pRepo.findById(i).orElse(null));
 		}		
@@ -48,12 +48,25 @@ public class PayCashDeskService implements IPayCashDeskService {
 	@Override
 	public void deleteCaisse(int id) {
 		caisseRepo.deleteById(id);
-		
 	}
 
 	@Override
 	public PayCashDesk updateCaisse(PayCashDesk c) {
 		return mongo.save(c);
+	}
+
+	@Override
+	public PayCashDesk OpenDayCaisse(int id) {
+		PayCashDesk p=caisseRepo.findById(id).get();
+		p.setCah_dayopen(true);
+		return mongo.save(p);
+	}
+
+	@Override
+	public PayCashDesk CloseDayCaisse(int id) {
+		PayCashDesk p=caisseRepo.findById(id).get();
+		p.setCah_dayopen(false);
+		return mongo.save(p);
 	}
 
 }

@@ -12,7 +12,13 @@ public interface IAdmUserService {
 	AdmUser searchUser(String matricule);
 	AdmUser updateUser(AdmUser user);
 	AdmUser getUserById(int id);
-	// show profiles of a user
+	// trier les utilisateurs 
+	// asc
+	List<AdmUser> listUsersSortedA();
+	//desc
+	List<AdmUser> listUsersSortedD();
+	List<AdmUser> listUsersSortedAF();
+	List<AdmUser> listUsersSortedDF();
 	
 	
 }

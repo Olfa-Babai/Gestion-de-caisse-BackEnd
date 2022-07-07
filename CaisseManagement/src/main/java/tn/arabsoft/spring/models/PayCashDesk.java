@@ -2,9 +2,7 @@ package tn.arabsoft.spring.models;
 
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 import javax.persistence.Transient;
 
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -27,7 +25,6 @@ public class PayCashDesk {
     public static final String SEQUENCE_NAME = "caisses_sequence";
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int cah_id;
 	private String cah_code;
 	private String cah_name;
@@ -35,7 +32,8 @@ public class PayCashDesk {
 	private String cah_maxtrans;
 	@Nullable
 	private int cah_internal;
-	
+	@Nullable
+	private boolean cah_dayopen;
 	@DBRef
 	private List<PayImpPyMorg> payimppymorg;
 	

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,14 +36,26 @@ public class AdmUserProfileController {
 	
 	@GetMapping("/get")
 	@ResponseBody
-	Map<AdmUser, List<AdmProfile>> organizing(){
+	public Map<AdmUser, List<AdmProfile>> organizing(){
 		return this.admUserProfileService.organizing();
 	}
 	
 	@GetMapping("/pdf")
 	@ResponseBody
-	void savetoPdf() throws FileNotFoundException, DocumentException{
+	public void savetoPdf() throws FileNotFoundException, DocumentException{
 		this.admUserProfileService.savetoPdf();
 	}
+	
+	@GetMapping("/extract/")
+	@ResponseBody
+	public Map<AdmUser, List<AdmProfile>> extract(@RequestParam String type){
+		return admUserProfileService.extract(type);
+	}
+	
+	@GetMapping("/searching/")
+	@ResponseBody
+	public Map<AdmUser, List<AdmProfile>> searching(String word){
+		return this.admUserProfileService.searching(word);
+		}
 
 }

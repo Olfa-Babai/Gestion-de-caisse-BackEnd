@@ -33,10 +33,8 @@ public class GenAgent {
 	private String age_pwd;
 	
 	private AdmUser admuser;
-	
-	@DBRef
-	private List<PayCashDeskSession> paycashdesksessions;
-	
+
 	@DBRef
 	private List<PayCashing> paycashing;
+	
 }

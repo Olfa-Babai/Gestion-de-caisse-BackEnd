@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tn.arabsoft.spring.models.PayCashDesk;
+import tn.arabsoft.spring.models.PayCashDeskDTO;
 import tn.arabsoft.spring.services.IPayCashDeskService;
 import tn.arabsoft.spring.services.SequenceGeneratorService;
 
@@ -32,13 +33,25 @@ public class PayCashDeskController {
 	
 	@PostMapping("/add")
 	@ResponseBody
-	public PayCashDesk addCaisse(@RequestBody PayCashDesk c, @RequestParam int[] ids){
-		c.setCah_id(sequenceGenerator.generateSequence(PayCashDesk.SEQUENCE_NAME));
-		return payService.addCaisse(c, ids);
+	public PayCashDesk addCaisse(@RequestBody PayCashDeskDTO p){
+		p.getP().setCah_id(sequenceGenerator.generateSequence(PayCashDesk.SEQUENCE_NAME));
+		p.getP().setCah_dayopen(false);
+		return payService.addCaisse(p.getP(),p.getIds());
 	}
 	
-	// update
+	@PutMapping("/openday/{id}")
+	@ResponseBody
+	public PayCashDesk OpenDayCaisse(@PathVariable int id){
+		return payService.OpenDayCaisse(id);
+	}
 	
+	@PutMapping("/closeday/{id}")
+	@ResponseBody
+	public PayCashDesk CloseDayCaisse(@PathVariable int id){
+		return payService.CloseDayCaisse(id);
+	}
+	
+	// update	
 	@PutMapping("/update")
 	@ResponseBody
 	public PayCashDesk updateCaisse(@RequestBody PayCashDesk c){

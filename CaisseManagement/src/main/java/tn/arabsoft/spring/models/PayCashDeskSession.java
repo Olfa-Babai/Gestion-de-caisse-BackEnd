@@ -1,12 +1,13 @@
 package tn.arabsoft.spring.models;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Transient;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.mongodb.lang.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,15 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document("paycashdesk")
+@Document("paycashdesksession")
 public class PayCashDeskSession {
 
+	@Transient
+    public static final String SEQUENCE_NAME = "sessions_sequence";
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int css_id;
-	private Date css_enddt;
+	@Nullable
+	private LocalDateTime css_enddt;
+	
+	private LocalDateTime css_startdt;
 	
 	private PayCashDesk paycashdesk;
+	
+	private GenAgent genAgent;
 	
 	private AdmUserProfile userprofileaffectation;
 	

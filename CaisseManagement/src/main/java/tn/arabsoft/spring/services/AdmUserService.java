@@ -1,6 +1,8 @@
 package tn.arabsoft.spring.services;
 
 import java.util.List;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -72,6 +74,26 @@ public class AdmUserService implements IAdmUserService {
 	@Override
 	public AdmUser getUserById(int id) {
 		return userRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<AdmUser> listUsersSortedAF() {
+		return userRepository.findAll(Sort.by(Sort.Direction.ASC, "use_fname"));
+	}
+	
+	@Override
+	public List<AdmUser> listUsersSortedDF() {
+		return userRepository.findAll(Sort.by(Sort.Direction.DESC, "use_fname"));
+	}
+
+	@Override
+	public List<AdmUser> listUsersSortedD() {
+		return userRepository.findAll(Sort.by(Sort.Direction.DESC, "use_lname"));
+	}
+
+	@Override
+	public List<AdmUser> listUsersSortedA() {
+		return userRepository.findAll(Sort.by(Sort.Direction.ASC, "use_lname"));
 	}
 
 }

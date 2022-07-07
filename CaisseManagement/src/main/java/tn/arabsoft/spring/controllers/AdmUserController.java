@@ -70,4 +70,29 @@ public class AdmUserController {
 		return this.admUserService.getUserById(id);
 	}
 	
+	@GetMapping("/sort")
+	@ResponseBody
+	public List<AdmUser> sortUsers(@RequestParam String lf,@RequestParam String ad) {
+		if(lf.equals("l")){
+			if(ad.equals("a"))
+			{
+				return this.admUserService.listUsersSortedA();
+			}
+			else{
+				return this.admUserService.listUsersSortedD();
+			}
+		}
+		else {
+			if(ad.equals("a"))
+			{
+				return this.admUserService.listUsersSortedAF();
+			}
+			else{
+				return this.admUserService.listUsersSortedDF();
+			}
+		}
+	}
+	
+	
+	
 }
