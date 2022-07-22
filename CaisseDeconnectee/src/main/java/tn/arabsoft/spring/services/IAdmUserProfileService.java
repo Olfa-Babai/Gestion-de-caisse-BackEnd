@@ -26,4 +26,5 @@ public interface IAdmUserProfileService {
 	Map<AdmUser, List<AdmProfile>> extract(String type);
 	// recherche user or profile
 	Map<AdmUser, List<AdmProfile>> searching(String word);
+	List<AdmProfile> getprofilesuser(int id);
 }

@@ -53,7 +53,13 @@ public class AdmUserController {
 	@ResponseBody
 	public List<AdmUser> allUsers() {
 		return this.admUserService.listUsers();
-	}	
+	}
+	
+	@GetMapping("/uexists/")
+	@ResponseBody
+	public AdmUser uexists(@RequestParam String login, @RequestParam String pwd) {
+		return this.admUserService.uexists(login,pwd);
+	}
 	
 	@GetMapping("/search")
 	@ResponseBody

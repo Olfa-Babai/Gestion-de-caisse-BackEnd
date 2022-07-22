@@ -19,6 +19,6 @@ public interface IAdmUserService {
 	List<AdmUser> listUsersSortedD();
 	List<AdmUser> listUsersSortedAF();
 	List<AdmUser> listUsersSortedDF();
-	
+	AdmUser uexists(String login, String pwd);
 	
 }

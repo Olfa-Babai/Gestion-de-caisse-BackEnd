@@ -203,5 +203,17 @@ public class AdmUserProfileService implements IAdmUserProfileService {
 		}
 		return map;
 	}
+	
+	@Override
+	public List<AdmProfile> getprofilesuser(int id){
+		AdmUser user=this.admu.findById(id).get();
+		List<AdmProfile> p=new ArrayList<AdmProfile>();
+		for(AdmUserProfile usp : this.admUserProfileRepository.findAll()){
+			if(usp.getUser_aff().equals(user)){
+				p.add(usp.getProfile_aff());
+			}
+		}
+		return p;
+	}
 
 }

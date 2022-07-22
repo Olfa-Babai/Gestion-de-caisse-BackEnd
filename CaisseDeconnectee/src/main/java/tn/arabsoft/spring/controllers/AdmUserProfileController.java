@@ -57,5 +57,10 @@ public class AdmUserProfileController {
 	public Map<AdmUser, List<AdmProfile>> searching(String word){
 		return this.admUserProfileService.searching(word);
 		}
-
+	
+	@GetMapping("/getprofiles/{idu}")
+	@ResponseBody
+	public List<AdmProfile> getProfilesOfUser(@PathVariable int idu){
+		return this.admUserProfileService.getprofilesuser(idu);
+	}
 }

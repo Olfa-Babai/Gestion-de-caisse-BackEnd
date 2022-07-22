@@ -97,4 +97,16 @@ public class AdmUserService implements IAdmUserService {
 				.collect(Collectors.toList());
 	}
 
+	@Override
+	public AdmUser uexists(String login, String pwd) {
+		AdmUser user=new AdmUser();
+		System.out.println(" login : "+login+" pwd : "+pwd);
+		for(AdmUser u : (List<AdmUser>) userRepository.findAll()){
+			if(u.getUse_login().equals(login) && u.getUse_psw().equals(pwd)){
+				user=u;
+			}
+		}
+		return user;
+	}
+
 }
