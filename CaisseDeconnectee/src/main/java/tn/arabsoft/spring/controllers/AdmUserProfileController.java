@@ -63,4 +63,12 @@ public class AdmUserProfileController {
 	public List<AdmProfile> getProfilesOfUser(@PathVariable int idu){
 		return this.admUserProfileService.getprofilesuser(idu);
 	}
+	
+	@GetMapping("/login/")
+	@ResponseBody
+	public AdmUserProfile loginIn(@RequestParam String login, @RequestParam String password,@RequestParam String role){
+		return this.admUserProfileService.loginUP(login, password, role);
+	}
+	
+	
 }

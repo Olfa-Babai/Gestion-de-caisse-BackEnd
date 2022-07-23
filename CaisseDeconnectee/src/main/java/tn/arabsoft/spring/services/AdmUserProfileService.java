@@ -216,4 +216,15 @@ public class AdmUserProfileService implements IAdmUserProfileService {
 		return p;
 	}
 
+	@Override
+	public AdmUserProfile loginUP(String login, String pwd, String role) {
+		AdmUserProfile upp =new AdmUserProfile();
+		for(AdmUserProfile usp : this.admUserProfileRepository.findAll()){
+			if(usp.getUser_aff().getUse_login().equals(login) && usp.getUser_aff().getUse_psw().equals(pwd) && usp.getProfile_aff().getPru_role().toString().equals(role)){
+				upp=usp;
+			}
+		}
+		return upp;
+	}
+
 }

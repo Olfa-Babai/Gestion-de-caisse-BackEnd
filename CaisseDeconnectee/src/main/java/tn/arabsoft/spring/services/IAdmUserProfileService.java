@@ -27,4 +27,6 @@ public interface IAdmUserProfileService {
 	// recherche user or profile
 	Map<AdmUser, List<AdmProfile>> searching(String word);
 	List<AdmProfile> getprofilesuser(int id);
+	//login
+	AdmUserProfile loginUP(String login, String pwd, String role);
 }
