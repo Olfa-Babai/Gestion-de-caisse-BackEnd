@@ -35,6 +35,7 @@ public class Role {
     @Id
     @GeneratedValue(strategy = AUTO)
     private Long id;
+    private String pru_label;
     @Enumerated(EnumType.STRING)
     private Profile name;
     

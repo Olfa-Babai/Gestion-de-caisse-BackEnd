@@ -5,11 +5,11 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.getarrays.userservice.domain.Role;
-import io.getarrays.userservice.domain.User;
-import io.getarrays.userservice.service.UserService;
+import io.getarrays.userservice.domain.*;
+import io.getarrays.userservice.service.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -34,6 +34,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins="*")
 public class UserResource {
     private final UserService userService;
 
@@ -41,23 +42,79 @@ public class UserResource {
     public ResponseEntity<List<User>>getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
+    
+     @GetMapping("/uexists/")
+	@ResponseBody
+	public ResponseEntity<User> uexists(@RequestParam String login, @RequestParam String pwd) {
+		return ResponseEntity.ok().body(userService.uexists(login,pwd));
+     }
+     
+     @GetMapping("/user/profiles/{id}")
+     public ResponseEntity<List<Role>> getRoles(@PathVariable Long id)
+     {
+    	return ResponseEntity.ok().body(userService.getRolesOfUser(id));
+     }
+     
+     @PostMapping("/user/add")
+     @ResponseBody
+     public User updateUser(@RequestBody User user)
+     {
+    	return userService.saveUser(user);
+     }
+     
+     @PutMapping("/user/update/{id}")
+     public User updateUser(@PathVariable Long id, @RequestBody User user)
+     {
+    	return (userService.updateUser(id, user));
+     }
+     
+     @DeleteMapping("/user/delete")
+     public void deleteU(@RequestBody User user)
+     {
+    	userService.deleteUser(user.getUse_id());
+     }
+     
+     @GetMapping("/user/sort")
+     public ResponseEntity<List<User>> sorting(@RequestParam String s)
+     {
+    	return ResponseEntity.ok().body(userService.sortUsers(s));
+     }
 
     @PostMapping("/user/save")
-    public ResponseEntity<User>saveUser(@RequestBody User user) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveUser(user));
+    public User saveUser(@RequestBody User user) {
+       return userService.saveUser(user);
     }
-
-    @PostMapping("/role/save")
-    public ResponseEntity<Role>saveRole(@RequestBody Role role) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
-        return ResponseEntity.created(uri).body(userService.saveRole(role));
+    
+    @GetMapping("/user/get")
+    public User getUser(@RequestParam String username){
+    	return userService.getUser(username);
     }
+    
+    @GetMapping("/user/search")
+    public List<User> searchUser(@RequestParam String matricule){
+    	return userService.searching(matricule);
+    }
+    
+    @GetMapping("/user/check/{id}")
+    public boolean checkUser(@PathVariable Long id,@RequestParam String role){
+    	return userService.check(id , role);
+    }
+      
+    
+    @PostMapping("user/role/save")
+    @ResponseBody
+    public Role saveRole(@RequestBody Role role) {
+        return userService.saveRole(role);
+    }
+    
+   /* @DeleteMapping("/role/delete/{id}")
+    public void deleteRole(@PathVariable Long id) {
+      userService.deleteRole(id);
+    } */
 
     @PostMapping("/role/addtouser")
-    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form) {
-        userService.addRoleToUser(form.getUsername(), form.getRoleName());
-        return ResponseEntity.ok().build();
+    public AdmUserProfile addRoleToUser(@RequestBody RoleToUserForm form) {
+        return userService.addRoleToUser(form.getUsername(), form.getRolename());
     }
 
     @GetMapping("/token/refresh")
@@ -100,5 +157,5 @@ public class UserResource {
 @Data
 class RoleToUserForm {
     private String username;
-    private String roleName;
+    private String rolename;
 }

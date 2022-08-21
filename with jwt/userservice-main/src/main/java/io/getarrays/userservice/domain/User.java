@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static javax.persistence.FetchType.*;
 import static javax.persistence.GenerationType.*;
 
 /**
@@ -22,6 +21,7 @@ import static javax.persistence.GenerationType.*;
  */
 @Entity @Data @NoArgsConstructor @AllArgsConstructor @Table(name = "admuser")
 public class User {
+	
     @Id @GeneratedValue(strategy = AUTO)
     private Long use_id;
     private String use_matricule;
@@ -44,8 +44,11 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="user_aff")
     Collection<AdmUserProfile> user_profile_aff=new ArrayList<>();
     
+    @OneToOne(mappedBy="admuser",cascade = CascadeType.ALL)
+	private GenAgent genagent;
+           
     @Override
 	public String toString() {
 		return "  Matricule :" + use_matricule +" | Nom et prenom : "+  lname+" " + fname + " ";
-	}    
+	}
 }
