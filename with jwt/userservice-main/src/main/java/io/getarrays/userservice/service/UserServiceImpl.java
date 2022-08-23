@@ -117,6 +117,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public GenAgent getAgent(String username){
+    	GenAgent genAgent=new GenAgent();
+    	for(GenAgent ga : this.agentRepo.findAll()){
+    		if (ga.getAge_login().equals(username)){
+    			genAgent=ga;
+    		}
+    	}
+    	return genAgent;
+    }
+    
+    @Override
     public List<User> getUsers() {
         log.info("Fetching all users");
         return userRepo.findAll();

@@ -100,6 +100,10 @@ public class UserResource {
     	return userService.check(id , role);
     }
       
+    @GetMapping("/user/agent")
+    public GenAgent getAgent(@RequestParam String username){
+    	return this.userService.getAgent(username);
+    }
     
     @PostMapping("user/role/save")
     @ResponseBody

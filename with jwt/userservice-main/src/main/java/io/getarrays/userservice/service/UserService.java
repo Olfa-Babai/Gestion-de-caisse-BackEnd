@@ -1,6 +1,7 @@
 package io.getarrays.userservice.service;
 
 import io.getarrays.userservice.domain.AdmUserProfile;
+import io.getarrays.userservice.domain.GenAgent;
 import io.getarrays.userservice.domain.Role;
 import io.getarrays.userservice.domain.User;
 
@@ -26,4 +27,5 @@ public interface UserService {
 	List<User> sortUsers(String s);
 	User uexists(String login, String pwd);
 	boolean check(Long id, String s);
+	GenAgent getAgent(String username);
 }
