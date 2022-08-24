@@ -9,6 +9,7 @@ import io.getarrays.userservice.domain.*;
 import io.getarrays.userservice.service.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@Slf4j
 @CrossOrigin(origins="*")
 public class UserResource {
     private final UserService userService;
@@ -69,9 +71,10 @@ public class UserResource {
      }
      
      @DeleteMapping("/user/delete")
-     public void deleteU(@RequestBody User user)
+     public void deleteU(@RequestParam String username)
      {
-    	userService.deleteUser(user.getUse_id());
+    	 User u=this.userService.getUser(username);
+    	userService.deleteUser(u.getUse_id());
      }
      
      @GetMapping("/user/sort")
@@ -99,11 +102,6 @@ public class UserResource {
     public boolean checkUser(@PathVariable Long id,@RequestParam String role){
     	return userService.check(id , role);
     }
-      
-    @GetMapping("/user/agent")
-    public GenAgent getAgent(@RequestParam String username){
-    	return this.userService.getAgent(username);
-    }
     
     @PostMapping("user/role/save")
     @ResponseBody
@@ -118,6 +116,7 @@ public class UserResource {
 
     @PostMapping("/role/addtouser")
     public AdmUserProfile addRoleToUser(@RequestBody RoleToUserForm form) {
+    	log.info("Usernam : {} | rolename : {}", form.getUsername(),form.getRolename());
         return userService.addRoleToUser(form.getUsername(), form.getRolename());
     }
 

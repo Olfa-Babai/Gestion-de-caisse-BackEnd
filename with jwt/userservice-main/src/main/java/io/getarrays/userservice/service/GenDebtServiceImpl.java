@@ -1,5 +1,6 @@
-package io.getarrays.userservice.service;
+	package io.getarrays.userservice.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,12 +9,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.getarrays.userservice.domain.AdmUserProfile;
 import io.getarrays.userservice.domain.GenAccount;
+import io.getarrays.userservice.domain.GenAgent;
 import io.getarrays.userservice.domain.GenDebt;
 import io.getarrays.userservice.domain.GenOrg;
 import io.getarrays.userservice.domain.Party;
 import io.getarrays.userservice.domain.PayCashDesk;
+import io.getarrays.userservice.domain.PayCashDeskSession;
 import io.getarrays.userservice.domain.PayImpPyMorg;
+import io.getarrays.userservice.domain.User;
 import io.getarrays.userservice.repo.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +34,7 @@ public class GenDebtServiceImpl implements GenDebtService {
     private final PartyRepo partyRepo;
     private final GenDebtRepo genDebtRepo;
     private final GenOrgRepo genOrgRepo;
+    private final PayCashDeskSessionRepo sessionRepo;
     
 	// lister les caisses : 
 	@Override
@@ -87,12 +93,48 @@ public class GenDebtServiceImpl implements GenDebtService {
 
 	@Override
 	public Party getClientFact(GenDebt genDebt) {
-		return genDebt.getParty();
+		return null;
 	}
 
 	@Override
 	public List<GenOrg> getAllOrgs() {
 		return this.genOrgRepo.findAll();
 	}
+
+	@Override
+	public PayCashDeskSession ouvrirSession(String username, Long id) {
+		GenAgent u= this.agentRepo.findByAgelogin(username);
+		PayCashDesk caisse=this.caisseRepo.findById(id).get();
+		PayCashDeskSession session=new PayCashDeskSession();
+		session.setGenagent(u);
+		session.setPaycashdesk(caisse);
+		session.setCss_startdt(LocalDateTime.now());
+		return this.sessionRepo.save(session);
+	}
+
+	@Override
+	public PayCashDeskSession fermerSession(Long id) {
+		PayCashDeskSession session=this.sessionRepo.findById(id).get();
+		session.setCss_enddt(LocalDateTime.now());
+		return this.sessionRepo.save(session);
+	}
+
+	@Override
+	public GenAgent getAgent(String login) {
+		return this.agentRepo.findByAgelogin(login);
+	}
+
+	@Override
+	public PayCashDeskSession checkSession() {
+		// TODO Auto-generated method stub
+		PayCashDeskSession session=new PayCashDeskSession();
+		for(PayCashDeskSession s: this.sessionRepo.findAll()){
+			if (s.getCss_enddt()==null){
+				session=s;
+			}
+		}
+		return session;
+	}
+
 
 }

@@ -1,10 +1,15 @@
 package io.getarrays.userservice.domain;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +26,8 @@ public class GenAgent {
 	private Long age_id;
 	private String age_refe;
 	private String age_name;
-	private String age_login;
+	@Column(name="age_login")
+	private String agelogin;
 	private String age_pwd;
 	
 	@JsonIgnore
@@ -31,9 +37,10 @@ public class GenAgent {
 	/*
 	@OneToMany(mappedBy="genagent",cascade = CascadeType.ALL)
 	List<PayCashing> paycashing;
-	 
+	*/
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="genagent")
 	List<PayCashDeskSession> paycashdesksession;
-	 */
+	 
 	
 }

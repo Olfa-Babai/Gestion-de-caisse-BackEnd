@@ -7,8 +7,7 @@ import io.getarrays.userservice.domain.AdmUserProfile;
 
 
 public interface UserProfileRepo extends JpaRepository<AdmUserProfile, Long> {
-/*
-	@Query("SELECT * FROM AdmUserProfile AS a GROUP BY a.user_aff")
-	List<Object[]> getAll(); */
+
+	//AdmUserProfile findByLogin(String login);
 	
 }

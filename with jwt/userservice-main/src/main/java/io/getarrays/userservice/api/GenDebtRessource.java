@@ -5,16 +5,20 @@ import java.util.List;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.getarrays.userservice.domain.GenAccount;
+import io.getarrays.userservice.domain.GenAgent;
 import io.getarrays.userservice.domain.GenDebt;
 import io.getarrays.userservice.domain.GenOrg;
 import io.getarrays.userservice.domain.Party;
 import io.getarrays.userservice.domain.PayCashDesk;
+import io.getarrays.userservice.domain.PayCashDeskSession;
 import io.getarrays.userservice.domain.PayImpPyMorg;
 import io.getarrays.userservice.service.*;
 import lombok.RequiredArgsConstructor;
@@ -85,6 +89,27 @@ public class GenDebtRessource {
 	@GetMapping("/user/org/all")
 	public List<GenOrg> getAllOrgs(){
 		return this.genDebt.getAllOrgs();
+	}
+	
+	//ouvrir session
+	@PostMapping("/user/session/open/{id}")
+	public PayCashDeskSession openSession(@RequestParam String login, @PathVariable Long id){
+		return this.genDebt.ouvrirSession(login, id);
+	}
+	
+	@PutMapping("/user/session/close/{id}")
+	public PayCashDeskSession closeSession(@PathVariable Long id){
+		return this.genDebt.fermerSession(id);
+	}
+	
+	@GetMapping("/user/session/check")
+	public PayCashDeskSession checkLastSession(){
+		return this.genDebt.checkSession();
+	}
+	
+	@GetMapping("/user/agent")
+	public GenAgent getTheAgent(@RequestParam String login){
+		return this.genDebt.getAgent(login);
 	}
 	
 }

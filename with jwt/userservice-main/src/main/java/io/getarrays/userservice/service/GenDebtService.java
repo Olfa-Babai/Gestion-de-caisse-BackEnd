@@ -17,5 +17,9 @@ public interface GenDebtService {
 	List<Party> getAllParties();
 	public Party getClientFact(GenDebt genDebt);
 	public List<GenOrg> getAllOrgs();
+	public PayCashDeskSession ouvrirSession(String username, Long id);
+	PayCashDeskSession fermerSession(Long id);
+	public GenAgent getAgent(String login);
+	public PayCashDeskSession checkSession();
 
 }

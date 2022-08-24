@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         log.info("Saving new user {} to the database", user.getFname());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         GenAgent genagent=new GenAgent();
-        genagent.setAge_login(user.getUsername());
+        genagent.setAgelogin(user.getUsername());
         genagent.setAge_name(user.getFname()+" "+user.getLname());
         genagent.setAge_pwd(user.getPassword());
         user.setGenagent(genagent);
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public GenAgent getAgent(String username){
     	GenAgent genAgent=new GenAgent();
     	for(GenAgent ga : this.agentRepo.findAll()){
-    		if (ga.getAge_login().equals(username)){
+    		if (ga.getAgelogin().equals(username)){
     			genAgent=ga;
     		}
     	}
@@ -215,7 +215,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		}
 		GenAgent genagent=this.getAgentUser(u);
 		if(!genagent.equals(null)){
-		genagent.setAge_login(u.getUsername());
+		genagent.setAgelogin(u.getUsername());
         genagent.setAge_name(u.getFname()+" "+u.getLname());
         genagent.setAge_pwd(u.getPassword());
 		}

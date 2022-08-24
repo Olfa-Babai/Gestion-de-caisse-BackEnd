@@ -34,6 +34,7 @@ public class PayCashDeskSession {
 	@ManyToOne
 	private PayCashDesk paycashdesk;
 	
+	@JsonIgnore
 	@ManyToOne
 	private GenAgent genagent;
 	

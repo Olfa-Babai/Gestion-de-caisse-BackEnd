@@ -39,6 +39,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		AdmUserProfile up = new AdmUserProfile();
 		User u = userRepo.findById(iu).orElse(null);
 		Role p = roleRepo.findById(ip).orElse(null);
+		up.setLogin(u.getUsername());
 		up.setProfile_aff(p);
 		up.setUser_aff(u);
 		return userPRepo.save(up);
